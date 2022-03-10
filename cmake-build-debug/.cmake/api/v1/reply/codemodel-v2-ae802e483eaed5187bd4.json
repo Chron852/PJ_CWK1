@@ -35,7 +35,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "code::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-code-Debug-ababd2feb26bad25ba9d.json",
+					"jsonFile" : "target-code-Debug-3fe08fc413ae8e0fda9d.json",
 					"name" : "code",
 					"projectIndex" : 0
 				}
@@ -45,8 +45,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "E:/LEARNING/LEEDS/YEAR TWO semester2/programming project/coursework1/code/cmake-build-debug",
-		"source" : "E:/LEARNING/LEEDS/YEAR TWO semester2/programming project/coursework1/code"
+		"build" : "E:/LEARNING/LEEDS/YEAR_TWO_semester2/programming_project/coursework1/code/cmake-build-debug",
+		"source" : "E:/LEARNING/LEEDS/YEAR_TWO_semester2/programming_project/coursework1/code"
 	},
 	"version" : 
 	{

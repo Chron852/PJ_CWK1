@@ -2,13 +2,19 @@
 #include <stdlib.h>
 #include "Register.h"
 #include "Login.h"
+#include "book_management.h"
 
 void userfile(){
     FILE *f;
-    if(f=fopen("user.txt","r") == NULL){
+    user *users;
+    users = (user *)malloc( 20*sizeof(user));
+    if((f=fopen("user.txt","r")) == NULL){
         printf("Data Loading!\n");
         f = fopen("user.txt","w");
         fclose(f);
+    }
+    else{
+        Loaduser(users);
     }
 }
 int main(){
@@ -16,7 +22,6 @@ int main(){
     char choice[100];
     signed char c;
     userfile();
-    Loaduser();
     choice[1] = ' ';
     printf("Welcome to online library!\n");
     printf("1.Login\n2.Register\n3.exit\n");

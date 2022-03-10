@@ -11,4 +11,8 @@ add_executable(code
         Login.c
         Login.h
         Register.c
-        Register.h)
+        Register.h
+        Librarian.c
+        Librarian.h
+        user.c
+        user.h)

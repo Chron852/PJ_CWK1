@@ -1,2 +1,4 @@
+#include "book_management.h"
+
 void Registersurface();
-void Loaduser();
+void Loaduser(user *user);

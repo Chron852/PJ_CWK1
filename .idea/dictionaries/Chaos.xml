@@ -1,8 +1,15 @@
 <component name="ProjectDictionaryState">
   <dictionary name="Chaos">
     <words>
+      <w>booklist</w>
+      <w>fgets</w>
+      <w>fopen</w>
+      <w>loaduser</w>
       <w>loginsurface</w>
+      <w>maxuser</w>
+      <w>plibrarynum</w>
       <w>registersurface</w>
+      <w>userfile</w>
     </words>
   </dictionary>
 </component>

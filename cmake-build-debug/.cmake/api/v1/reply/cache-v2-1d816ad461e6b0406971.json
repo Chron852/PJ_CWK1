@@ -67,7 +67,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "e:/LEARNING/LEEDS/YEAR TWO semester2/programming project/coursework1/code/cmake-build-debug"
+			"value" : "e:/LEARNING/LEEDS/YEAR_TWO_semester2/programming_project/coursework1/code/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -491,7 +491,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "E:/LEARNING/LEEDS/YEAR TWO semester2/programming project/coursework1/code"
+			"value" : "E:/LEARNING/LEEDS/YEAR_TWO_semester2/programming_project/coursework1/code"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1131,7 +1131,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "E:/LEARNING/LEEDS/YEAR TWO semester2/programming project/coursework1/code/cmake-build-debug"
+			"value" : "E:/LEARNING/LEEDS/YEAR_TWO_semester2/programming_project/coursework1/code/cmake-build-debug"
 		},
 		{
 			"name" : "code_IS_TOP_LEVEL",
@@ -1155,7 +1155,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "E:/LEARNING/LEEDS/YEAR TWO semester2/programming project/coursework1/code"
+			"value" : "E:/LEARNING/LEEDS/YEAR_TWO_semester2/programming_project/coursework1/code"
 		}
 	],
 	"kind" : "cache",
