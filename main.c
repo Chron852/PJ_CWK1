@@ -1,12 +1,22 @@
-//
-// Created by Chaos on 2022/3/8.
-//
 #include <stdio.h>
+#include <stdlib.h>
 #include "Register.h"
 #include "Login.h"
+
+void userfile(){
+    FILE *f;
+    if(f=fopen("user.txt","r") == NULL){
+        printf("Data Loading!\n");
+        f = fopen("user.txt","w");
+        fclose(f);
+    }
+}
 int main(){
     int i = 0,j=0;
-    char choice[100],c;
+    char choice[100];
+    signed char c;
+    userfile();
+    Loaduser();
     choice[1] = ' ';
     printf("Welcome to online library!\n");
     printf("1.Login\n2.Register\n3.exit\n");
@@ -17,7 +27,7 @@ int main(){
         j++;
     }
     do{
-        if(choice[1] != ' '){
+        if(choice[1] != ' ' || choice[0] != '1' && choice[0] != '2' && choice[0] != '3'){
             printf("Wrong instruction!\nPlease retype your instruction:");
             choice[1] = ' ';
             j = 0;
@@ -38,17 +48,6 @@ int main(){
         }
         else if(choice[0] == '3'){
             return 0;
-        }
-        else{
-            printf("Wrong instruction!\nPlease retype your instruction:");
-            choice[1] = ' ';
-            j = 0;
-            c = getchar();
-            while(c != '\n'){
-                choice[j] = c;
-                c = getchar();
-                j++;
-            }
         }
     }while(i==0);
 
