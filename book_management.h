@@ -29,7 +29,7 @@ typedef struct _User{
     char *password;
     int Plibrarynum;
     struct _User *next;
-}user;
+}User;
 
 
 //saves the database of books in the specified file

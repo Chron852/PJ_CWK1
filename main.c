@@ -6,15 +6,15 @@
 
 void userfile(){
     FILE *f;
-    user *users;
-    users = (user *)malloc( 20*sizeof(user));
+    User *users,*h1,*p1;
+    users = (User *)malloc( 20*sizeof(User));
     if((f=fopen("user.txt","r")) == NULL){
         printf("Data Loading!\n");
         f = fopen("user.txt","w");
         fclose(f);
     }
     else{
-        Loaduser(users);
+        Loaduser(users,h1,p1);
     }
 }
 int main(){
