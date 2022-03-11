@@ -2,6 +2,7 @@
   <dictionary name="Chaos">
     <words>
       <w>booklist</w>
+      <w>checkname</w>
       <w>fgets</w>
       <w>fopen</w>
       <w>loaduser</w>

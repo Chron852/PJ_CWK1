@@ -4,27 +4,28 @@
 #include "Login.h"
 #include "book_management.h"
 
-void userfile(){
-    FILE *f;
-    User *users,*h1,*p1;
-    users = (User *)malloc( sizeof(User));
-    h1 =  (User *)malloc(sizeof (User));
-    p1 = (User *)malloc(sizeof (User));
-    if((f=fopen("user.txt","r")) == NULL){
-        printf("Data Loading!\n");
-        f = fopen("user.txt","w");
-        fputs("librarian\tlibrarian\n",f);
-    }
-    else{
-        Loaduser(users,h1,p1);
-    }
-    fclose(f);
-}
+
 int main(){
     int i = 0,j=0;
     char choice[100];
     signed char c;
-    userfile();
+    FILE *f;
+    User *users,*h1;
+    users = (User *)malloc( sizeof(User));
+    h1 =  (User *)malloc(sizeof (User));
+    if((f=fopen("user.txt","r")) == NULL){
+        printf("Data Loading!\n");
+        f = fopen("user.txt","w");
+        fputs("librarian\tlibrarian\n",f);
+        users->username = "librarian";
+        users->password = "librarian";
+        users->Plibrarynum = 0;
+        users->next = NULL;
+        h1->next = users;
+    }
+    else {
+        Loaduser(users, h1, f);
+    }
     choice[1] = ' ';
     printf("Welcome to online library!\n");
     printf("1.Login\n2.Register\n3.exit\n");
@@ -48,16 +49,16 @@ int main(){
         }
         else if(choice[0] == '1'){
             i = 1;
-            Loginsurface();
+            Loginsurface(h1,f);
         }
         else if( choice[0] == '2'){
             i = 1;
-            Registersurface();
+            Registersurface(h1,f);
         }
         else if(choice[0] == '3'){
             return 0;
         }
     }while(i==0);
-
+    fclose(f);
     return 0;
 }
