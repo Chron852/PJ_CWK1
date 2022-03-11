@@ -5,29 +5,30 @@
 #include "book_management.h"
 
 void Loaduser(User *user,User *h,User *p){
-    /*FILE *f;
-    char *c;
-    int i,j,flag,count=0;
-    f=fopen("user.txt","r");
-    while (fgets(c,sizeof(*c),f)!=EOF) {
+    FILE *f;
+    char c;
+    int i,flag,count=0;
+    f = fopen("user.txt","r");
+    c = fgetc(f);
+    while (c != EOF) {
         i = 0;
-        j = 0;
         flag = 0;
-        while (c[i] != '\0') {
-            if (c[i] == '\t') {
+        while (c != '\n') {
+            c = fgetc(f);
+            if (c == '\t') {
                 flag = 1;
                 p->username[i] = '\0';
-                i++;
+                i = 0;
             } else if (flag == 0) {
-                p->username[i] = c[i];
+                p->username[i] = c;
                 i++;
             } else {
-                p->password[j] = c[i];
+                p->password[i] = c;
                 i++;
-                j++;
             }
-            p->password[j] = '\0';
         }
+        p->password[i] = '\0';
+        p->Plibrarynum = count;
         count++;
         if(count == 1){
             user = p;
@@ -37,10 +38,9 @@ void Loaduser(User *user,User *h,User *p){
             user->next = p;
             user = p;
         }
+        c = fgetc(f);
     }
-    user->next =NULL;
-    fclose(f);
-    return;*/
+    user->next = NULL;
 }
 
 void Registersurface(){

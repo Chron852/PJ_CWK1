@@ -7,15 +7,18 @@
 void userfile(){
     FILE *f;
     User *users,*h1,*p1;
-    users = (User *)malloc( 20*sizeof(User));
+    users = (User *)malloc( sizeof(User));
+    h1 =  (User *)malloc(sizeof (User));
+    p1 = (User *)malloc(sizeof (User));
     if((f=fopen("user.txt","r")) == NULL){
         printf("Data Loading!\n");
         f = fopen("user.txt","w");
-        fclose(f);
+        fputs("librarian\tlibrarian\n",f);
     }
     else{
         Loaduser(users,h1,p1);
     }
+    fclose(f);
 }
 int main(){
     int i = 0,j=0;
