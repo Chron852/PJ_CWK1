@@ -4,28 +4,65 @@
 #include "Login.h"
 #include "book_management.h"
 
+void Loaduser(User *user,User *h,FILE *f){
+    char c;
+    User *p;
+    p = (User *)malloc(sizeof(User));
+    int k,flag,count=0;
+    c = fgetc(f);
+    while (c != EOF) {
+        k = 0;
+        flag = 0;
+        while (c != '\n') {
+            if (c == '\t') {
+                flag = 1;
+                p->username[k] = '\0';
+                k = 0;
+            }
+            else if (flag == 0) {
+                p->username[k] = c;
+                k++;
+            }
+            else {
+                p->password[k] = c;
+                k++;
+            }
+            c = fgetc(f);
+        }
+        p->password[k] = '\0';
+        p->Plibrarynum = count;
+        count++;
+        if(count == 1){
+            user = p;
+            h->next = user;
+        }
+        else{
+            user->next = p;
+            user = p;
+        }
+        c = fgetc(f);
+    }
+    user->next = NULL;
+    return;
+}
 
 int main(){
     int i = 0,j=0;
     char choice[100];
     signed char c;
-    FILE *f;
+    FILE *f = NULL;
     User *users,*h1;
     users = (User *)malloc( sizeof(User));
     h1 =  (User *)malloc(sizeof (User));
-    if((f=fopen("user.txt","r")) == NULL){
+    f = fopen("user.txt","r+");
+    if(f == NULL){
         printf("Data Loading!\n");
         f = fopen("user.txt","w");
         fputs("librarian\tlibrarian\n",f);
-        users->username = "librarian";
-        users->password = "librarian";
-        users->Plibrarynum = 0;
-        users->next = NULL;
-        h1->next = users;
+        fclose(f);
+        f = fopen("user.txt","r+");
     }
-    else {
-        Loaduser(users, h1, f);
-    }
+    Loaduser(users,h1, f);
     choice[1] = ' ';
     printf("Welcome to online library!\n");
     printf("1.Login\n2.Register\n3.exit\n");
@@ -56,9 +93,9 @@ int main(){
             Registersurface(h1,f);
         }
         else if(choice[0] == '3'){
-            return 0;
+            break;
         }
-    }while(i==0);
+    }while(i == 0);
     fclose(f);
     return 0;
 }
