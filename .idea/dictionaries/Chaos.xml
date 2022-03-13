@@ -3,10 +3,12 @@
     <words>
       <w>booklist</w>
       <w>checkname</w>
+      <w>createuser</w>
       <w>fgets</w>
       <w>fopen</w>
       <w>loaduser</w>
       <w>loginsurface</w>
+      <w>mainsurface</w>
       <w>maxuser</w>
       <w>plibrarynum</w>
       <w>registersurface</w>

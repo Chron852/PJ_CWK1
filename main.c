@@ -1,36 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "Register.h"
 #include "Login.h"
 #include "book_management.h"
 
-void Loaduser(User *user,User *h){
-    char *c;
+void Loaduser(User *h){
     FILE *f;
-    printf("Data Loading!\n");
+    User *user;
     if((f = fopen("user.txt","r+")) == NULL){
         f = fopen("user.txt","w");
         fputs("librarian\tlibrarian\n",f);
         fclose(f);
     }
     f = fopen("user.txt","r");
-    User *p;
-    p = (User *)malloc(sizeof(User));
-    p->password = malloc(1024);
-    p->username = malloc(1024);
+    User *p,*s;
+    s = (User *)malloc(sizeof(User));
+    s->password = malloc(1024);
+    s->username = malloc(1024);
     int count=0;
-    char *username= malloc(1024);
-    char *password= malloc(1024);
-    while (fscanf(f,"%s",p->username) != EOF) {
-        fscanf(f,"%s",p->password);
-        if(count == 0){
-            h -> next = p;
-            user = p;
-        }
-        else{
-            user -> next = p;
-            user = p;
-        }
+    user = h;
+    while (fscanf(f,"%s",s->username) != EOF) {
+        fscanf(f,"%s",s->password);
+        s->password[strlen(s->password)] = '\0';
+        s->username[strlen(s->username)] = '\0';
+        p = (User *)malloc(sizeof(User));
+        p->password = malloc(1024);
+        p->username = malloc(1024);
+        strcpy(p->username,s->username);
+        strcpy(p->password,s->password);
+        user->next = p;
+        user = p;
         user->Plibrarynum = count;
         count++;
     }
@@ -39,14 +39,10 @@ void Loaduser(User *user,User *h){
     return;
 }
 
-int main(){
+void mainsurface(User *user,User *h){
     int i = 0,j=0;
     char choice[100];
     signed char c;
-    User *users,*h1;
-    users = (User *)malloc( sizeof(User));
-    h1 =  (User *)malloc(sizeof (User));
-    Loaduser(users,h1);
     choice[1] = ' ';
     printf("Welcome to online library!\n");
     printf("1.Login\n2.Register\n3.exit\n");
@@ -70,15 +66,24 @@ int main(){
         }
         else if(choice[0] == '1'){
             i = 1;
-            Loginsurface(h1);
+            Loginsurface(h,user);
         }
         else if( choice[0] == '2'){
             i = 1;
-            Registersurface(h1);
+            Registersurface(h,user);
         }
         else if(choice[0] == '3'){
             break;
         }
     }while(i == 0);
+}
+
+int main(){
+    User *users,*h1;
+    users = (User *)malloc( sizeof(User));
+    h1 =  (User *)malloc(sizeof (User));
+    printf("Data Loading!\n");
+    Loaduser(h1);
+    mainsurface(users,h1);
     return 0;
 }

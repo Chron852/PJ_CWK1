@@ -31,7 +31,6 @@ typedef struct _User{
     struct _User *next;
 }User;
 
-
 //saves the database of books in the specified file
 //returns 0 if books were stored correctly, or an error code otherwise
 int store_books(FILE *file);
