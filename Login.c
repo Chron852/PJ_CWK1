@@ -2,6 +2,6 @@
 #include "Login.h"
 #include "book_management.h"
 
-void Loginsurface(User *h,FILE *f){
+void Loginsurface(User *h){
 
 }
