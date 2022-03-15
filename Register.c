@@ -4,6 +4,21 @@
 #include "book_management.h"
 #include "Login.h"
 
+int checkpass(char *pass){
+    int i,flag = 0;
+    i = strlen(pass);
+    if(i > 20){
+        flag = 1;
+    }
+    else if(pass[0] == 'e'){
+        flag = 2;
+    }
+    else if(i < 3){
+        flag = 3;
+    }
+    return flag;
+}
+
 int checkname(char *name,User *h){
     User *k;
     int j,flag = 0;
@@ -78,7 +93,7 @@ void Registersurface(User *h,User *user){
             mainsurface(user,h);
         }
     }
-    printf("Please enter your passcode:");
+    printf("Please enter your passcode(3-20 letters):");
     c = getchar();
     i = 0;
     while( c != '\n'){
@@ -88,6 +103,37 @@ void Registersurface(User *h,User *user){
     }
     pass = pass1;
     pass[i] = '\0';
+    while(checkpass(pass1) != 0){
+        if(checkpass(pass1) == 1){
+            printf("Longer than 20 letters\n");
+            printf("Please retype(or type e to back to upper surface):");
+            i = 0;
+            c = getchar();
+            while( c != '\n'){
+                pass1[i] = c;
+                i++;
+                c = getchar();
+            }
+            pass = pass1;
+            pass[i] = '\0';
+        }
+        else if(checkpass(pass1) == 2){
+            mainsurface(user,h);
+        }
+        else if(checkpass(pass1) == 3){
+            printf("Shorter than 3 letters\n");
+            printf("Please retype(or type e to back to upper surface):");
+            i = 0;
+            c = getchar();
+            while( c != '\n'){
+                pass1[i] = c;
+                i++;
+                c = getchar();
+            }
+            pass = pass1;
+            pass[i] = '\0';
+        }
+    }
     f = fopen("user.txt","a");
     fputs(name,f);
     fputc('\t',f);

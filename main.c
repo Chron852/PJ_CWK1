@@ -16,8 +16,8 @@ void Loaduser(User *h){
     f = fopen("user.txt","r");
     User *p,*s;
     s = (User *)malloc(sizeof(User));
-    s->password = malloc(1024);
-    s->username = malloc(1024);
+    s->password = malloc(20 *sizeof(char));
+    s->username = malloc(20 *sizeof(char));
     int count=0;
     user = h;
     while (fscanf(f,"%s",s->username) != EOF) {
@@ -25,8 +25,8 @@ void Loaduser(User *h){
         s->password[strlen(s->password)] = '\0';
         s->username[strlen(s->username)] = '\0';
         p = (User *)malloc(sizeof(User));
-        p->password = malloc(1024);
-        p->username = malloc(1024);
+        p->password = malloc(20 *sizeof(char));
+        p->username = malloc(20 *sizeof(char));
         strcpy(p->username,s->username);
         strcpy(p->password,s->password);
         user->next = p;
@@ -44,7 +44,7 @@ void mainsurface(User *user,User *h){
     char choice[100];
     signed char c;
     choice[1] = ' ';
-    printf("Welcome to online library!\n");
+    printf("\n\n\nWelcome to online library!\n");
     printf("1.Login\n2.Register\n3.exit\n");
     c = getchar();
     while(c != '\n'){

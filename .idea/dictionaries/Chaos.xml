@@ -3,6 +3,7 @@
     <words>
       <w>booklist</w>
       <w>checkname</w>
+      <w>checkpass</w>
       <w>createuser</w>
       <w>fgets</w>
       <w>fopen</w>
