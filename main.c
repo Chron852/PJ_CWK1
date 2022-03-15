@@ -80,6 +80,7 @@ void mainsurface(User *user,User *h){
 
 int main(){
     User *users,*h1;
+    Book *h2;
     users = (User *)malloc( sizeof(User));
     h1 =  (User *)malloc(sizeof (User));
     printf("Data Loading!\n");
