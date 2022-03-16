@@ -9,10 +9,7 @@ add_executable(code
         book_management.h
         main.c
         Login.c
-        Login.h
         Register.c
-        Register.h
         Librarian.c
-        Librarian.h
         user.c
-        user.h)
+        )

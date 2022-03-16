@@ -4,6 +4,7 @@
 #include "Register.h"
 #include "Login.h"
 #include "book_management.h"
+#include "Librarian.h"
 
 void Loaduser(User *h){
     FILE *f;
@@ -78,11 +79,70 @@ void mainsurface(User *user,User *h){
     }while(i == 0);
 }
 
+int storebook(Book *h){
+    int flag = 0;
+    Book *l;
+    FILE *file;
+    file = fopen("books.txt","r+");
+    if(file == NULL){
+        file = fopen("books.txt","w");
+        fclose(file);
+    }
+    else{
+        l = h;
+        while(l->next != NULL){
+            l = l->next;
+            fputs(l->id,file);
+            fputs("\t",file);
+            fputs(l->title,file);
+            fputs("\t",file);
+            fputs(l->authors,file);
+            fputs("\t",file);
+            fputs(l->year,file);
+            fputs("\t",file);
+            fputs(l->copies,file);
+            fputs("\n",file);
+        }
+        fclose(file);
+    }
+    return flag;
+}
+
+int loadbook(Book *h){
+    FILE *f = fopen("books.txt","r");
+    Book *s = (Book *)malloc(sizeof (Book)),*last;
+    Book *book = (Book *)malloc(sizeof (Book));
+    book = h;
+    while(fscanf(f,"%u",s->id)!=EOF){
+        fscanf(f,"%s",s->title);
+        fscanf(f,"%s",s->authors);
+        fscanf(f,"%u",s->year);
+        fscanf(f,"%u",s->copies);
+        s->authors[strlen(s->authors)] = '\0';
+        s->title[strlen(s->title)] = '\0';
+        last->title = (char *)malloc(40*sizeof (char));
+        last->authors = (char *)malloc(40*sizeof (char));
+        last->id = s->id;
+        last->year = s->year;
+        last->copies = s->copies;
+        strcpy(last->authors,s->authors);
+        strcpy(last->title,s->title);
+        book->next = last;
+        book = last;
+    }
+    book->next = NULL;
+    fclose(f);
+    return 0;
+}
+
 int main(){
     User *users,*h1;
     Book *h2;
     users = (User *)malloc( sizeof(User));
-    h1 =  (User *)malloc(sizeof (User));
+    h1 = (User *)malloc(sizeof (User));
+    h2 = (Book *) malloc(sizeof(Book));
+    storebook(h2);
+    loadbook(h2);
     printf("Data Loading!\n");
     Loaduser(h1);
     mainsurface(users,h1);
