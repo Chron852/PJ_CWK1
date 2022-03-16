@@ -4,12 +4,12 @@
 #include "Register.h"
 #include "Login.h"
 #include "book_management.h"
-#include "Librarian.h"
 
 void Loaduser(User *h){
     FILE *f;
     User *user;
-    if((f = fopen("user.txt","r+")) == NULL){
+    f = fopen("user.txt","r+");
+    if(f == NULL){
         f = fopen("user.txt","w");
         fputs("librarian\tlibrarian\n",f);
         fclose(f);
@@ -79,72 +79,81 @@ void mainsurface(User *user,User *h){
     }while(i == 0);
 }
 
-int storebook(Book *h){
+
+int store_books(FILE *file,Book *h){
     int flag = 0;
     Book *l;
-    FILE *file;
     file = fopen("books.txt","r+");
     if(file == NULL){
         file = fopen("books.txt","w");
         fclose(file);
     }
-    else{
+    if(h->next != NULL) {
         l = h;
-        while(l->next != NULL){
+        while (l->next != NULL) {
             l = l->next;
-            fputs(l->id,file);
-            fputs("\t",file);
-            fputs(l->title,file);
-            fputs("\t",file);
-            fputs(l->authors,file);
-            fputs("\t",file);
-            fputs(l->year,file);
-            fputs("\t",file);
-            fputs(l->copies,file);
-            fputs("\n",file);
+            fputc(l->id, file);
+            fputs("\t", file);
+            fputs(l->title, file);
+            fputs("\t", file);
+            fputs(l->authors, file);
+            fputs("\t", file);
+            fputc(l->year, file);
+            fputs("\t", file);
+            fputc(l->copies, file);
+            fputs("\n", file);
         }
         fclose(file);
+    }
+    else{
+        flag = 1;
     }
     return flag;
 }
 
-int loadbook(Book *h){
-    FILE *f = fopen("books.txt","r");
-    Book *s = (Book *)malloc(sizeof (Book)),*last;
-    Book *book = (Book *)malloc(sizeof (Book));
+int load_books(FILE *file,Book *h){
+    store_books(file,h);
+    char c[1024],*m;
+    file = fopen("books.txt","r");
+    Book *last;
+    Book *book;
     book = h;
-    while(fscanf(f,"%u",s->id)!=EOF){
-        fscanf(f,"%s",s->title);
-        fscanf(f,"%s",s->authors);
-        fscanf(f,"%u",s->year);
-        fscanf(f,"%u",s->copies);
-        s->authors[strlen(s->authors)] = '\0';
-        s->title[strlen(s->title)] = '\0';
+    while(fgets(c,1024,file) != NULL){
+        last = (Book *) malloc(sizeof (char));
         last->title = (char *)malloc(40*sizeof (char));
         last->authors = (char *)malloc(40*sizeof (char));
-        last->id = s->id;
-        last->year = s->year;
-        last->copies = s->copies;
-        strcpy(last->authors,s->authors);
-        strcpy(last->title,s->title);
+        m = strtok(c,"\t");
+        last->id = atoi(m);
+        m = strtok(NULL,"\t");
+        strcpy(last->title,m);
+        last->title[strlen(last->title)] = '\0';
+        m = strtok(NULL,"\t");
+        strcpy(last->authors, m);
+        last->authors[strlen(last->authors)] = '\0';
+        m = strtok(NULL,"\t");
+        last->year = atoi(m);
+        m = strtok(NULL,"\t");
+        last->copies = atoi(m);
         book->next = last;
         book = last;
     }
     book->next = NULL;
-    fclose(f);
+    fclose(file);
     return 0;
 }
 
 int main(){
     User *users,*h1;
     Book *h2;
+    FILE *file = NULL;
     users = (User *)malloc( sizeof(User));
     h1 = (User *)malloc(sizeof (User));
+    h1->next = NULL;
     h2 = (Book *) malloc(sizeof(Book));
-    storebook(h2);
-    loadbook(h2);
-    printf("Data Loading!\n");
+    h2->next = NULL;
+    load_books(file, h2);
     Loaduser(h1);
+    printf("Data Loading!\n");
     mainsurface(users,h1);
     return 0;
 }

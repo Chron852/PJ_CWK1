@@ -5,7 +5,5 @@
 #include "book_management.h"
 
 void librariansurface();
-int loadbook(Book *h);
-int storebook(Book *h);
 
 #endif //MAIN_C_LIBRARIAN_H
