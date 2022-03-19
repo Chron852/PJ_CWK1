@@ -4,6 +4,6 @@
 
 #include "book_management.h"
 #include<stdio.h>
-void Loginsurface(User *h,User *user,Book *b);
+void Loginsurface(User *h,Book *b);
 int checkTpass(char *pass,User *h,char *name);
 #endif //MAIN_C_LOGIN_H

@@ -42,11 +42,11 @@ int load_books(FILE *file,Book *h);
 
 //adds a book to the ones available to the library
 //returns 0 if the book could be added, or an error code otherwise
-int add_book(Book book);
+int add_book(Book *book);
 
 //removes a book from the library
 //returns 0 if the book could be successfully removed, or an error code otherwise.
-int remove_book(Book book);
+int remove_book(Book *book);
 
 //finds books with a given title.
 //returns a BookList structure, where the field "list" is a list of books, or null if no book with the 

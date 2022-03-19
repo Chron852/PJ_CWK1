@@ -1,11 +1,13 @@
 <component name="ProjectDictionaryState">
   <dictionary name="Chaos">
     <words>
+      <w>abook</w>
       <w>booklist</w>
       <w>checkname</w>
       <w>checkpass</w>
       <w>createbook</w>
       <w>createuser</w>
+      <w>dbook</w>
       <w>fgets</w>
       <w>fopen</w>
       <w>librariansurface</w>

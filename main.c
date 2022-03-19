@@ -40,13 +40,15 @@ void Loaduser(User *h){
     return;
 }
 
-void mainsurface(User *user,User *h,Book *b){
+void mainsurface(User *h,Book *b){
     int i = 0,j=0;
     char choice[100];
     signed char c;
+    User *user;
     choice[1] = ' ';
     printf("\n\n\nWelcome to online library!\n");
     printf("1.Login\n2.Register\n3.exit\n");
+    printf("Please enter you choice:");
     c = getchar();
     while(c != '\n'){
         choice[j] = c;
@@ -67,11 +69,11 @@ void mainsurface(User *user,User *h,Book *b){
         }
         else if(choice[0] == '1'){
             i = 1;
-            Loginsurface(h,user,b);
+            Loginsurface(h,b);
         }
         else if( choice[0] == '2'){
             i = 1;
-            Registersurface(h,user,b);
+            Registersurface(h,b);
         }
         else if(choice[0] == '3'){
             break;
@@ -176,10 +178,8 @@ int main(){
     h2 = (Book *) malloc(sizeof(Book));
     h2->next = NULL;
     load_books(file, h2);
-    Book *h;
-    h = h2;
     Loaduser(h1);
     printf("Data Loading!\n");
-    mainsurface(users,h1,h2);
+    mainsurface(h1,h2);
     return 0;
 }
