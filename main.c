@@ -40,7 +40,7 @@ void Loaduser(User *h){
     return;
 }
 
-void mainsurface(User *user,User *h){
+void mainsurface(User *user,User *h,Book *b){
     int i = 0,j=0;
     char choice[100];
     signed char c;
@@ -67,11 +67,11 @@ void mainsurface(User *user,User *h){
         }
         else if(choice[0] == '1'){
             i = 1;
-            Loginsurface(h,user);
+            Loginsurface(h,user,b);
         }
         else if( choice[0] == '2'){
             i = 1;
-            Registersurface(h,user);
+            Registersurface(h,user,b);
         }
         else if(choice[0] == '3'){
             break;
@@ -111,36 +111,60 @@ int store_books(FILE *file,Book *h){
     return flag;
 }
 
+Book *createbook(unsigned int id,char *title,char *authors,unsigned int year,unsigned int copies){
+    Book *book = (Book *)malloc(sizeof(Book));
+    book->id = id;
+    book->title = title;
+    book->authors = authors;
+    book->year = year;
+    book->copies = copies;
+    return book;
+}
+
+void linkbook(unsigned int id,char *title,char *authors,unsigned int year,unsigned int copies,Book *h){
+    Book *nbook = createbook(id,title,authors,year,copies);
+    nbook->next = NULL;
+    if(h->next == NULL){
+        h->next = nbook;
+    }
+    else{
+        Book *s;
+        s = h->next;
+        while(s->next != NULL){
+            s = s->next;
+        }
+        s->next = nbook;
+    }
+}
+
 int load_books(FILE *file,Book *h){
     store_books(file,h);
-    char c[1024],*m;
+    char c[1024];
     file = fopen("books.txt","r");
-    Book *last;
-    Book *book;
-    book = h;
     while(fgets(c,1024,file) != NULL){
-        last = (Book *) malloc(sizeof (char));
-        last->title = (char *)malloc(40*sizeof (char));
-        last->authors = (char *)malloc(40*sizeof (char));
-        m = strtok(c,"\t");
-        last->id = atoi(m);
-        m = strtok(NULL,"\t");
-        strcpy(last->title,m);
-        last->title[strlen(last->title)] = '\0';
-        m = strtok(NULL,"\t");
-        strcpy(last->authors, m);
-        last->authors[strlen(last->authors)] = '\0';
-        m = strtok(NULL,"\t");
-        last->year = atoi(m);
-        m = strtok(NULL,"\t");
-        last->copies = atoi(m);
-        book->next = last;
-        book = last;
+        char *m;
+        m = strtok(c,"=");
+        unsigned int id = atoi(m);
+        m = strtok(NULL,"=");
+        char *title;
+        title = (char *)malloc(sizeof (title));
+        strcpy(title,m);
+        title[strlen(title)] = '\0';
+        m = strtok(NULL,"=");
+        char *authors;
+        authors = (char *)malloc(sizeof (m));
+        strcpy(authors, m);
+        authors[strlen(authors)] = '\0';
+        m = strtok(NULL,"=");
+        unsigned int year = atoi(m);
+        m = strtok(NULL,"\n");
+        unsigned int copies = atoi(m);
+        linkbook(id,title,authors,year,copies,h);
     }
-    book->next = NULL;
     fclose(file);
     return 0;
 }
+
 
 int main(){
     User *users,*h1;
@@ -152,8 +176,10 @@ int main(){
     h2 = (Book *) malloc(sizeof(Book));
     h2->next = NULL;
     load_books(file, h2);
+    Book *h;
+    h = h2;
     Loaduser(h1);
     printf("Data Loading!\n");
-    mainsurface(users,h1);
+    mainsurface(users,h1,h2);
     return 0;
 }

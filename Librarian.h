@@ -4,6 +4,6 @@
 
 #include "book_management.h"
 
-void librariansurface();
+void librariansurface(Book *b);
 
 #endif //MAIN_C_LIBRARIAN_H

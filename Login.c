@@ -35,7 +35,7 @@ int checkTpass(char *pass,User *h,char *name){
     return flag;
 }
 
-void Loginsurface(User *h,User *user){
+void Loginsurface(User *h,User *user,Book *b){
     char c,name1[100],pass1[100],*name,*pass;
     int i;
     printf("Please enter your username:");
@@ -63,7 +63,7 @@ void Loginsurface(User *h,User *user){
             name[i] = '\0';
         }
         else if(checkname(name,h) == 3){
-            mainsurface(user,h);
+            mainsurface(user,h,b);
         }
     }
     printf("Please enter your passcode:");
@@ -91,11 +91,11 @@ void Loginsurface(User *h,User *user){
             pass[i] = '\0';
         }
         else if(checkTpass(pass,h,name) == 2){
-            mainsurface(user,h);
+            mainsurface(user,h,b);
         }
     }
     if(check("librarian",name) == 1){
-        librariansurface();
+        librariansurface(b);
     }
     else{
         usersurface(name);

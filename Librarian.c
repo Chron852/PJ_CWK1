@@ -1,6 +1,5 @@
 #include<stdio.h>
-
-void librariansurface(){
-
-    printf("1");
+#include "book_management.h"
+void librariansurface(Book *b){
+    
 }

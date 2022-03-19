@@ -51,7 +51,7 @@ int checkname(char *name,User *h){
     return flag;
 }
 
-void Registersurface(User *h,User *user){
+void Registersurface(User *h,User *user,Book *b){
     char *name,*pass,c,name1[100],pass1[100];
     FILE *f;
     int i = 0;
@@ -90,7 +90,7 @@ void Registersurface(User *h,User *user){
             name[i] = '\0';
         }
         else if(checkname(name,h) == 3){
-            mainsurface(user,h);
+            mainsurface(user,h,b);
         }
     }
     printf("Please enter your passcode(3-20 letters):");
@@ -118,7 +118,7 @@ void Registersurface(User *h,User *user){
             pass[i] = '\0';
         }
         else if(checkpass(pass1) == 2){
-            mainsurface(user,h);
+            mainsurface(user,h,b);
         }
         else if(checkpass(pass1) == 3){
             printf("Shorter than 3 letters\n");
@@ -142,5 +142,5 @@ void Registersurface(User *h,User *user){
     printf("Registered Successfully!\n");
     fclose(f);
     Loaduser(h);
-    Loginsurface(h,user);
+    Loginsurface(h,user,b);
 }
