@@ -12,6 +12,9 @@
       <w>fopen</w>
       <w>librariansurface</w>
       <w>linkbook</w>
+      <w>listauthor</w>
+      <w>listtitle</w>
+      <w>listyear</w>
       <w>loadbook</w>
       <w>loaduser</w>
       <w>loginsurface</w>
@@ -20,6 +23,7 @@
       <w>nbook</w>
       <w>plibrarynum</w>
       <w>registersurface</w>
+      <w>searchbook</w>
       <w>storebook</w>
       <w>tpass</w>
       <w>userfile</w>

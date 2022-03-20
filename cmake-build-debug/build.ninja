@@ -49,6 +49,13 @@ cmake_ninja_workdir = E$:/LEARNING/LEEDS/YEAR_TWO_semester2/programming_project/
 
 build cmake_object_order_depends_target_code: phony || CMakeFiles/code.dir
 
+build CMakeFiles/code.dir/book_management.obj: C_COMPILER__code_Debug E$:/LEARNING/LEEDS/YEAR_TWO_semester2/programming_project/coursework1/code/book_management.c || cmake_object_order_depends_target_code
+  DEP_FILE = CMakeFiles\code.dir\book_management.obj.d
+  FLAGS = -g -std=gnu11
+  INCLUDES = -IE:/LEARNING/LEEDS/YEAR_TWO_semester2/programming_project/coursework1/code/.
+  OBJECT_DIR = CMakeFiles\code.dir
+  OBJECT_FILE_DIR = CMakeFiles\code.dir
+
 build CMakeFiles/code.dir/main.obj: C_COMPILER__code_Debug E$:/LEARNING/LEEDS/YEAR_TWO_semester2/programming_project/coursework1/code/main.c || cmake_object_order_depends_target_code
   DEP_FILE = CMakeFiles\code.dir\main.obj.d
   FLAGS = -g -std=gnu11
@@ -92,7 +99,7 @@ build CMakeFiles/code.dir/user.obj: C_COMPILER__code_Debug E$:/LEARNING/LEEDS/YE
 #############################################
 # Link the executable code.exe
 
-build code.exe: C_EXECUTABLE_LINKER__code_Debug CMakeFiles/code.dir/main.obj CMakeFiles/code.dir/Login.obj CMakeFiles/code.dir/Register.obj CMakeFiles/code.dir/Librarian.obj CMakeFiles/code.dir/user.obj
+build code.exe: C_EXECUTABLE_LINKER__code_Debug CMakeFiles/code.dir/book_management.obj CMakeFiles/code.dir/main.obj CMakeFiles/code.dir/Login.obj CMakeFiles/code.dir/Register.obj CMakeFiles/code.dir/Librarian.obj CMakeFiles/code.dir/user.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\code.dir

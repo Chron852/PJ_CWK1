@@ -69,6 +69,7 @@
 			},
 			"sourceIndexes" : 
 			[
+				0,
 				1,
 				2,
 				3,
@@ -107,16 +108,10 @@
 	"sourceGroups" : 
 	[
 		{
-			"name" : "Header Files",
-			"sourceIndexes" : 
-			[
-				0
-			]
-		},
-		{
 			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
+				0,
 				1,
 				2,
 				3,
@@ -129,38 +124,39 @@
 	[
 		{
 			"backtrace" : 1,
-			"path" : "book_management.h",
+			"compileGroupIndex" : 0,
+			"path" : "book_management.c",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "main.c",
-			"sourceGroupIndex" : 1
+			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "Login.c",
-			"sourceGroupIndex" : 1
+			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "Register.c",
-			"sourceGroupIndex" : 1
+			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "Librarian.c",
-			"sourceGroupIndex" : 1
+			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "user.c",
-			"sourceGroupIndex" : 1
+			"sourceGroupIndex" : 0
 		}
 	],
 	"type" : "EXECUTABLE"

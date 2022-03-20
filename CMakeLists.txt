@@ -6,7 +6,7 @@ set(CMAKE_C_STANDARD 11)
 include_directories(.)
 
 add_executable(code
-        book_management.h
+        book_management.c
         main.c
         Login.c
         Register.c

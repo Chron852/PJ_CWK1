@@ -42,29 +42,31 @@ int load_books(FILE *file,Book *h);
 
 //adds a book to the ones available to the library
 //returns 0 if the book could be added, or an error code otherwise
-int add_book(Book *book);
+int add_book(Book *book,User *h1);
 
 //removes a book from the library
 //returns 0 if the book could be successfully removed, or an error code otherwise.
-int remove_book(Book *book);
+int remove_book(Book *book,User *h1);
 
 //finds books with a given title.
 //returns a BookList structure, where the field "list" is a list of books, or null if no book with the 
 //provided title can be found. The length of the list is also recorded in the returned structure, with 0 in case
 //list is the NULL pointer.
-BookList find_book_by_title (const char *title);
+BookList find_book_by_title (const char *title,Book *b);
 
 //finds books with the given authors.
 //returns a Booklist structure, where the field "list" is a newly allocated list of books, or null if no book with the 
 //provided title can be found. The length of the list is also recorded in the returned structure, with 0 in case
 //list is the NULL pointer.
-BookList find_book_by_author (const char *author);
+BookList find_book_by_author (const char *author,Book *b);
 
 //finds books published in the given year.
 //returns a Booklist structure, where the field "list" is a list of books, or null if no book with the 
 //provided title can be found. The length of the list is also recorded in the returned structure, with 0 in case
 //list is the NULL pointer.
-BookList find_book_by_year (unsigned int year);
+BookList find_book_by_year (unsigned int year,Book *b);
 
+void linkbook(unsigned int id,char *title,char *authors,unsigned int year,unsigned int copies,Book *h);
+void searchbook(Book *b,User *h);
 
 #endif
