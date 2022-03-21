@@ -98,6 +98,6 @@ void Loginsurface(User *h,Book *b){
         librariansurface(h,b);
     }
     else{
-        usersurface(name);
+        usersurface(name,b,h);
     }
 }

@@ -3,6 +3,7 @@
     <words>
       <w>abook</w>
       <w>booklist</w>
+      <w>borrowbook</w>
       <w>checkname</w>
       <w>checkpass</w>
       <w>createbook</w>
@@ -17,13 +18,16 @@
       <w>listyear</w>
       <w>loadbook</w>
       <w>loaduser</w>
+      <w>loaduserbook</w>
       <w>loginsurface</w>
       <w>mainsurface</w>
       <w>maxuser</w>
       <w>nbook</w>
       <w>plibrarynum</w>
       <w>registersurface</w>
+      <w>returnbook</w>
       <w>searchbook</w>
+      <w>searchbookuser</w>
       <w>storebook</w>
       <w>tpass</w>
       <w>userfile</w>

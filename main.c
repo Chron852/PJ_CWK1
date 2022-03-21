@@ -32,7 +32,6 @@ void Loaduser(User *h){
         strcpy(p->password,s->password);
         user->next = p;
         user = p;
-        user->Plibrarynum = count;
         count++;
     }
     user->next = NULL;
@@ -44,10 +43,9 @@ void mainsurface(User *h,Book *b){
     int i = 0,j=0;
     char choice[100];
     signed char c;
-    User *user;
     choice[1] = ' ';
     printf("\n\n\nWelcome to online library!\n");
-    printf("1.Login\n2.Register\n3.exit\n");
+    printf("Choose an option:\n1.Login\n2.Register\n3.exit\n");
     printf("Please enter you choice:");
     c = getchar();
     while(c != '\n'){
@@ -76,16 +74,17 @@ void mainsurface(User *h,Book *b){
             Registersurface(h,b);
         }
         else if(choice[0] == '3'){
-            break;
+            printf("\nLibrary closed!");
+            i = 1;
+            return;
         }
     }while(i == 0);
 }
 
 int main(){
-    User *users,*h1;
+    User *h1;
     Book *h2;
     FILE *file = NULL;
-    users = (User *)malloc( sizeof(User));
     h1 = (User *)malloc(sizeof (User));
     h1->next = NULL;
     h2 = (Book *) malloc(sizeof(Book));

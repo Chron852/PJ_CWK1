@@ -326,7 +326,6 @@ void searchbook(Book *b,User *h){
             }else{
                 printf("Book do not exist!\n");
             }
-            librariansurface(h,b);
         }
         else if( choice[0] == '2'){
             k = 1;
@@ -352,7 +351,6 @@ void searchbook(Book *b,User *h){
             }else{
                 printf("Book do not exist!\n");
             }
-            librariansurface(h,b);
         }
         else if(choice[0] == '3'){
             k = 1;
@@ -387,13 +385,12 @@ void searchbook(Book *b,User *h){
             }else{
                 printf("Book do not exist!\n");
             }
-            librariansurface(h,b);
         }
         else if(choice[0] == '4'){
             k = 1;
-            librariansurface(h,b);
         }
     }while(k == 0);
+    librariansurface(h,b);
 }
 //
 // Created by Chaos on 2022/3/20.

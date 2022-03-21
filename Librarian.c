@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include<stdlib.h>
 #include "Login.h"
 #include "book_management.h"
 #include "Register.h"
@@ -36,7 +35,7 @@ void librariansurface(User *h1,Book *b){
     choice[1] = ' ';
     int i = 0,j = 0;
     printf("\nWelcome to the librarian interface!\n");
-    printf("1.list all books\n2.add books\n3.delete books\n4.search books\n5.exit\n");
+    printf("Choose an option:\n1.list all books\n2.add books\n3.delete books\n4.search books\n5.exit\n");
     printf("Please enter you choice:");
     c = getchar();
     while(c != '\n'){
@@ -75,6 +74,7 @@ void librariansurface(User *h1,Book *b){
         }
         else if(choice[0] == '5'){
             FILE *f;
+            i = 1;
             store_books(f,b);
             mainsurface(h1,b);
             break;
