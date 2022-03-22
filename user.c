@@ -198,7 +198,7 @@ void borrowbook(Book *b,Book *u){
         }
         do{
             if(choice[1] != ' ' || k > m || k < 0){
-                printf("Wrong instruction!\nPlease retype your instruction:");
+                printf("Book ID invalid!\nPlease retype ID:");
                 choice[1] = ' ';
                 j = 0;
                 k = 0;
@@ -236,69 +236,71 @@ void borrowbook(Book *b,Book *u){
 
 void returnbook(Book *b,Book *u){
     list_user_books(u);
-    char choice[100],c;
-    choice[1] = ' ';
-    int i = 0,j,k = 0,m = 0;
-    Book *s,*last;
-    s = u;
-    while(s->next != NULL){
-        s = s->next;
-        m++;
-    }
-    printf("Please choose the book id:");
-    j = 0;
-    c = getchar();
-    while(c != '\n'){
-        choice[j] = c;
-        k = k*10 + c - '0';
-        c = getchar();
-        j++;
-    }
-    do{
-        if(choice[1] != ' ' || k > m || k < 0){
-            printf("Wrong instruction!\nPlease retype your instruction:");
-            choice[1] = ' ';
-            j = 0;
-            k = 0;
-            c = getchar();
-            while(c != '\n'){
-                choice[j] = c;
-                k = k*10 + c - '0';
-                c = getchar();
-                j++;
-            }
+    if(u->next != NULL){
+        char choice[100],c;
+        choice[1] = ' ';
+        int i = 0,j,k = 0,m = 0;
+        Book *s,*last;
+        s = u;
+        while(s->next != NULL){
+            s = s->next;
+            m++;
         }
-        else{
-            i = 1;
-            last = u;
-            s = u->next;
-            while(s->id != k){
-                last = s;
-                s = s->next;
-            }
-            Book *re = b->next;
-            while(strcmp(re->title,s->title) != 0 || strcmp(re->authors,s->authors) != 0){
-                re = re->next;
-            }
-            re->copies += 1;
-            last->next = s->next;
-            free((void *)s);
-            if(last->next != NULL){
-                s = last->next;
-                if(s == u->next){
-                    s->id = 1;
-                } else{
-                    s->id = last->id + 1;
+        printf("Please choose the book id:");
+        j = 0;
+        c = getchar();
+        while(c != '\n'){
+            choice[j] = c;
+            k = k*10 + c - '0';
+            c = getchar();
+            j++;
+        }
+        do{
+            if(choice[1] != ' ' || k > m || k < 0){
+                printf("Book ID invalid!\nPlease retype ID:");
+                choice[1] = ' ';
+                j = 0;
+                k = 0;
+                c = getchar();
+                while(c != '\n'){
+                    choice[j] = c;
+                    k = k*10 + c - '0';
+                    c = getchar();
+                    j++;
                 }
-                while(s->next != NULL){
+            }
+            else{
+                i = 1;
+                last = u;
+                s = u->next;
+                while(s->id != k){
                     last = s;
                     s = s->next;
-                    s->id = last->id + 1;
                 }
+                Book *re = b->next;
+                while(strcmp(re->title,s->title) != 0 || strcmp(re->authors,s->authors) != 0){
+                    re = re->next;
+                }
+                re->copies += 1;
+                last->next = s->next;
+                free((void *)s);
+                if(last->next != NULL){
+                    s = last->next;
+                    if(s == u->next){
+                        s->id = 1;
+                    } else{
+                        s->id = last->id + 1;
+                    }
+                    while(s->next != NULL){
+                        last = s;
+                        s = s->next;
+                        s->id = last->id + 1;
+                    }
+                }
+                printf("Returned successfully!\n");
             }
-            printf("Returned successfully!\n");
-        }
-    }while(i == 0);
+        }while(i == 0);
+    }
     return;
 }
 
