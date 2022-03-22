@@ -127,47 +127,50 @@ int add_book(Book *book,User *h1){
         printf("Book exists!\n");
         t = 1;
         librariansurface(h1,book);
-    }
-    printf("Please enter years:");
-    i = 0;
-    c = getchar();
-    while( c != '\n'){
-        if(c <'0' || c > '9'){
-            flag = 1;
-            break;
-        }
-        year1[i] = c;
-        i++;
+    }else{
+        printf("Please enter years:");
+        i = 0;
         c = getchar();
-    }
-    if(flag == 1){
-        printf("Year must be an integer!\n");
-        t = 1;
-        librariansurface(h1,book);
-    }
-    year1[i] = '\0';
-    year = atoi(year1);
-    printf("Please enter copies:");
-    i = 0;
-    c = getchar();
-    while( c != '\n'){
-        if(c <'0' || c > '9'){
-            flag = 1;
-            break;
+        while( c != '\n'){
+            if(c <'0' || c > '9'){
+                flag = 1;
+                break;
+            }
+            year1[i] = c;
+            i++;
+            c = getchar();
         }
-        copies1[i] = c;
-        i++;
-        c = getchar();
+        if(flag == 1){
+            printf("Year must be an integer!\n");
+            t = 1;
+            librariansurface(h1,book);
+        }else{
+            year1[i] = '\0';
+            year = atoi(year1);
+            printf("Please enter copies:");
+            i = 0;
+            c = getchar();
+            while( c != '\n'){
+                if(c <'0' || c > '9'){
+                    flag = 1;
+                    break;
+                }
+                copies1[i] = c;
+                i++;
+                c = getchar();
+            }
+            if(flag == 1){
+                printf("Copies must be an integer!\n");
+                t = 1;
+                librariansurface(h1,book);
+            }else{
+                copies1[i] = '\0';
+                copies = atoi(copies1);
+                linkbook(id,title,author,year,copies,book);
+                librariansurface(h1,book);
+            }
+        }
     }
-    if(flag == 1){
-        printf("Copies must be an integer!\n");
-        t = 1;
-        librariansurface(h1,book);
-    }
-    copies1[i] = '\0';
-    copies = atoi(copies1);
-    linkbook(id,title,author,year,copies,book);
-    librariansurface(h1,book);
 
     return t;
 }

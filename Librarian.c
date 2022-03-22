@@ -6,11 +6,16 @@
 void list_books(Book *b){
     Book *h;
     h = b;
-    printf("\n\nID\tTitle\tAuthors\tYears\tCopies\n");
-    while(h->next != NULL){
-        h = h->next;
-        printf("%d\t%s\t%s\t%d\t%d\n",h->id,h->title,h->authors,h->year,h->copies);
+    if(b->next != NULL){
+        printf("\n\nID\tTitle\tAuthors\tYears\tCopies\n");
+        while(h->next != NULL){
+            h = h->next;
+            printf("%d\t%s\t%s\t%d\t%d\n",h->id,h->title,h->authors,h->year,h->copies);
+        }
+    } else{
+        printf("There is no book!\n");
     }
+    printf("\n");
 }
 
 int checkbook(char *title,char *author,Book *b){
