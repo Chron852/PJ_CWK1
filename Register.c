@@ -53,7 +53,6 @@ int checkname(char *name,User *h){
 
 void Registersurface(User *h,Book *b){
     char *name,*pass,c,name1[100],pass1[100];
-    User *user;
     FILE *f;
     int i = 0;
     printf("Please enter your username(3-20 letters):");
@@ -142,6 +141,6 @@ void Registersurface(User *h,Book *b){
     fputc('\n',f);
     printf("Registered Successfully!\n");
     fclose(f);
-    Loaduser(h);
+    Loaduser(h->username,h);
     Loginsurface(h,b);
 }

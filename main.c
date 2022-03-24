@@ -5,16 +5,17 @@
 #include "Login.h"
 #include "book_management.h"
 
-void Loaduser(User *h){
+void Loaduser(char *filename,User *h){
     FILE *f;
     User *user;
-    f = fopen("user.txt","r+");
+    h->username = filename;
+    f = fopen(filename,"r+");
     if(f == NULL){
-        f = fopen("user.txt","w");
+        f = fopen(filename,"w");
         fputs("librarian\tlibrarian\n",f);
         fclose(f);
     }
-    f = fopen("user.txt","r");
+    f = fopen(filename,"r");
     User *p,*s;
     s = (User *)malloc(sizeof(User));
     s->password = malloc(20 *sizeof(char));
@@ -44,8 +45,8 @@ void mainsurface(User *h,Book *b){
     char choice[100];
     signed char c;
     choice[1] = ' ';
-    printf("\n\n\nWelcome to online library!\n");
-    printf("Choose an option:\n1.Login\n2.Register\n3.exit\n");
+    printf("\n\n******************************************\nWelcome to online library!\n");
+    printf("Choose an option:\n1.Login\n2.Register\n3.exit\n******************************************\n");
     printf("Please enter you choice:");
     c = getchar();
     while(c != '\n'){
@@ -54,7 +55,7 @@ void mainsurface(User *h,Book *b){
         j++;
     }
     do{
-        if(choice[1] != ' ' || choice[0] != '1' && choice[0] != '2' && choice[0] != '3'){
+        if(choice[1] != ' ' || (choice[0] != '1' && choice[0] != '2' && choice[0] != '3')){
             printf("Wrong instruction!\nPlease retype your instruction:");
             choice[1] = ' ';
             j = 0;
@@ -75,22 +76,27 @@ void mainsurface(User *h,Book *b){
         }
         else if(choice[0] == '3'){
             printf("\nLibrary closed!");
-            i = 1;
             return;
         }
     }while(i == 0);
 }
 
-int main(){
+int main(int argc,char *argv[]){
     User *h1;
     Book *h2;
-    FILE *file = NULL;
+    char *file1 = "books.txt",*file2 = "user.txt";
+    if(argc == 2){
+        file1 = argv[1];
+    }else if(argc == 3){
+        file1 = argv[1];
+        file2 = argv[2];
+    }
     h1 = (User *)malloc(sizeof (User));
     h1->next = NULL;
     h2 = (Book *) malloc(sizeof(Book));
     h2->next = NULL;
-    load_books(file, h2);
-    Loaduser(h1);
+    load_books(file1, h2);
+    Loaduser(file2,h1);
     printf("Data Loading!\n");
     mainsurface(h1,h2);
     return 0;

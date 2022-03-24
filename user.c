@@ -49,7 +49,7 @@ void loaduserbook(Book *b,char *name){
             unsigned int year = atoi(m);
             m = strtok(NULL,"\n");
             unsigned int copies = atoi(m);
-            linkbook(id,title,authors,year,copies,b);
+            linkbook(id,title,authors,year,copies,1,b);
         }
         fclose(file);
     }
@@ -70,7 +70,7 @@ void searchbookuser(Book *b,User *h,char *name){
         j++;
     }
     do{
-        if(choice[1] != ' ' || choice[0] != '1' && choice[0] != '2' && choice[0] != '3' && choice[0] != '4'){
+        if(choice[1] != ' ' || (choice[0] != '1' && choice[0] != '2' && choice[0] != '3' && choice[0] != '4')){
             printf("Wrong instruction!\nPlease retype your instruction:");
             choice[1] = ' ';
             j = 0;
@@ -217,7 +217,7 @@ void borrowbook(Book *b,Book *u){
                     s = s->next;
                 }
                 if(s->copies > 0 && checkborrow(u,s->title,s->authors) == 0){
-                    linkbook(n+1,s->title,s->authors,s->year,s->copies,u);
+                    linkbook(n+1,s->title,s->authors,s->year,s->copies,s->whole,u);
                     s->copies -= 1;
                     printf("Borrowed successfully!\n");
                 }
@@ -346,8 +346,8 @@ void usersurface(char *name,Book *b,User *h){
     loaduserbook(us,name);
     name = name1;
     choice[1] = ' ';
-    printf("\nWelcome, %s!\n",name);
-    printf("Choose you option:\n1.list all books\n2.search for books\n3.borrow books\n4.return books\n5.exit\n");
+    printf("\n******************************************\nWelcome, %s!\n",name);
+    printf("Choose you option:\n1.list all books\n2.search for books\n3.borrow books\n4.return books\n5.exit\n******************************************\n");
     printf("Please enter you choice:");
     j = 0;
     c = getchar();
@@ -357,7 +357,7 @@ void usersurface(char *name,Book *b,User *h){
         j++;
     }
     do{
-        if(choice[1] != ' ' || choice[0] != '1' && choice[0] != '2' && choice[0] != '3' && choice[0] != '4' && choice[0] != '5'){
+        if(choice[1] != ' ' || (choice[0] != '1' && choice[0] != '2' && choice[0] != '3' && choice[0] != '4' && choice[0] != '5')){
             printf("Wrong instruction!\nPlease retype your instruction:");
             choice[1] = ' ';
             j = 0;
@@ -418,9 +418,8 @@ void usersurface(char *name,Book *b,User *h){
         }
         else if(choice[0] == '5'){
             i = 1;
-            FILE *f;
             storebook(name,us);
-            store_books(f,b);
+            store_books(b->title,b);
             mainsurface(h,b);
         }
     }while(i == 0);

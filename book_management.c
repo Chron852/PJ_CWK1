@@ -5,11 +5,12 @@
 #include "Librarian.h"
 #include "Login.h"
 
-int store_books(FILE *file,Book *h){
+int store_books(char *filename,Book *h){
     int flag = 0;
+    FILE *file;
     Book *l;
-    if((file = fopen("books.txt","r")) == NULL){
-        file = fopen("books.txt","w");
+    if((file = fopen(filename,"r")) == NULL){
+        file = fopen(filename,"w");
         fclose(file);
     }
     else{
@@ -17,7 +18,7 @@ int store_books(FILE *file,Book *h){
     }
     if(h->next != NULL) {
         l = h;
-        file = fopen("books.txt","w");
+        file = fopen(filename,"w");
         while (l->next != NULL) {
             l = l->next;
             fprintf(file,"%d",l->id);
@@ -29,28 +30,30 @@ int store_books(FILE *file,Book *h){
             fprintf(file,"%d",l->year);
             fputc('=',file);
             fprintf(file,"%d",l->copies);
+            fputc('=',file);
+            fprintf(file,"%d",l->whole);
             fputc('\n',file);
         }
     }
     else{
         flag = 1;
     }
-    fclose(file);
     return flag;
 }
 
-Book *createbook(unsigned int id,char *title,char *authors,unsigned int year,unsigned int copies){
+Book *createbook(unsigned int id,char *title,char *authors,unsigned int year,unsigned int copies,int whole){
     Book *book = (Book *)malloc(sizeof(Book));
     book->id = id;
     book->title = title;
     book->authors = authors;
     book->year = year;
     book->copies = copies;
+    book->whole = whole;
     return book;
 }
 
-void linkbook(unsigned int id,char *title,char *authors,unsigned int year,unsigned int copies,Book *h){
-    Book *nbook = createbook(id,title,authors,year,copies);
+void linkbook(unsigned int id,char *title,char *authors,unsigned int year,unsigned int copies,int borrowed, Book *h){
+    Book *nbook = createbook(id,title,authors,year,copies,borrowed);
     nbook->next = NULL;
     if(h->next == NULL){
         h->next = nbook;
@@ -65,10 +68,12 @@ void linkbook(unsigned int id,char *title,char *authors,unsigned int year,unsign
     }
 }
 
-int load_books(FILE *file,Book *h){
-    store_books(file,h);
+int load_books(char *filename,Book *h){
+    FILE *file;
+    h->title = filename;
+    store_books(filename,h);
     char c[1024];
-    file = fopen("books.txt","r");
+    file = fopen(filename,"r");
     while(fgets(c,1024,file) != NULL){
         char *m;
         m = strtok(c,"=");
@@ -85,9 +90,11 @@ int load_books(FILE *file,Book *h){
         authors[strlen(authors)] = '\0';
         m = strtok(NULL,"=");
         unsigned int year = atoi(m);
-        m = strtok(NULL,"\n");
+        m = strtok(NULL,"=");
         unsigned int copies = atoi(m);
-        linkbook(id,title,authors,year,copies,h);
+        m = strtok(NULL,"\n");
+        int whole = atoi(m);
+        linkbook(id,title,authors,year,copies,whole,h);
     }
     fclose(file);
     return 0;
@@ -143,6 +150,7 @@ int add_book(Book *book,User *h1){
         if(flag == 1){
             printf("Year must be an integer!\n");
             t = 1;
+            getchar();
             librariansurface(h1,book);
         }else{
             year1[i] = '\0';
@@ -162,11 +170,12 @@ int add_book(Book *book,User *h1){
             if(flag == 1){
                 printf("Copies must be an integer!\n");
                 t = 1;
+                getchar();
                 librariansurface(h1,book);
             }else{
                 copies1[i] = '\0';
                 copies = atoi(copies1);
-                linkbook(id,title,author,year,copies,book);
+                linkbook(id,title,author,year,copies,copies,book);
                 librariansurface(h1,book);
             }
         }
@@ -186,48 +195,60 @@ int remove_book(Book *book,User *h1){
         m++;
     }
     list_books(book);
-    printf("Please choose the book id:");
-    j = 0;
-    c = getchar();
-    while(c != '\n'){
-        choice[j] = c;
-        k = k*10 + c - '0';
+    if(book->next != NULL){
+        printf("Please choose the book id:");
+        j = 0;
         c = getchar();
-        j++;
-    }
-    do{
-        if(choice[1] != ' ' || k > m || k < 0){
-            printf("Wrong instruction!\nPlease retype your instruction:");
-            choice[1] = ' ';
-            j = 0;
-            k = 0;
+        while(c != '\n'){
+            choice[j] = c;
+            k = k*10 + c - '0';
             c = getchar();
-            while(c != '\n'){
-                choice[j] = c;
-                k = k*10 + c - '0';
+            j++;
+        }
+        do{
+            if(choice[1] != ' ' || k > m || k < 0){
+                printf("Wrong instruction!\nPlease retype your instruction:");
+                choice[1] = ' ';
+                j = 0;
+                k = 0;
                 c = getchar();
-                j++;
+                while(c != '\n'){
+                    choice[j] = c;
+                    k = k*10 + c - '0';
+                    c = getchar();
+                    j++;
+                }
             }
-        }
-        else{
-            i = 1;
-            s = book->next;
-            while(s->id != k){
-                last = s;
-                s = s->next;
+            else{
+                i = 1;
+                s = book->next;
+                last = book;
+                while(s->id != k){
+                    last = s;
+                    s = s->next;
+                }
+                if(s->copies != s->whole){
+                    printf("Book have been borrowed!\nYou cannot remove!\n");
+                }else{
+                    last->next = s->next;
+                    s = last->next;
+                    if(s != NULL){
+                        if(book->next == s){
+                            s->id =  1;
+                        }else{
+                            s->id = last->id + 1;
+                        }
+                        while(s->next != NULL){
+                            last = s;
+                            s = s->next;
+                            s->id = last->id + 1;
+                        }
+                    }
+                    printf("Removed successfully!\n");
+                }
             }
-            last->next = s->next;
-            free((void *)s);
-            s = last->next;
-            s->id = last->id + 1;
-            while(s->next != NULL){
-                last = s;
-                s = s->next;
-                s->id = last->id + 1;
-            }
-            printf("Removed successfully!\n");
-        }
-    }while(i == 0);
+        }while(i == 0);
+    }
     librariansurface(h1,book);
 
     return t;
@@ -239,11 +260,12 @@ BookList find_book_by_title (const char *title, Book *b){
     BookList listtitle;
     listtitle.list = (Book *) malloc(sizeof (Book));
     listtitle.list->next = NULL;
-    char *title1= strdup(title);
+    char *title1 = (char *)malloc(100*sizeof (char));
+    strcpy(title1,title);
     while(s->next != NULL){
         s = s->next;
         if(check(s->title,title1) == 1){
-            linkbook(s->id,s->title,s->authors,s->year,s->copies, listtitle.list);
+            linkbook(s->id,s->title,s->authors,s->year,s->copies,s->whole, listtitle.list);
         }
     }
     return listtitle;
@@ -255,11 +277,12 @@ BookList find_book_by_author (const char *author,Book *b){
     BookList listauthor;
     listauthor.list = (Book *)malloc(sizeof (Book));
     listauthor.list->next = NULL;
-    char *author1= strdup(author);
+    char *author1 = (char *)malloc(100*sizeof (char));
+    strcpy(author1,author);
     while(s->next != NULL){
         s = s->next;
         if(check(s->authors,author1) == 1){
-            linkbook(s->id,s->title,s->authors,s->year,s->copies, listauthor.list);
+            linkbook(s->id,s->title,s->authors,s->year,s->copies,s->whole, listauthor.list);
         }
     }
     return listauthor;
@@ -274,7 +297,7 @@ BookList find_book_by_year (unsigned int year,Book *b){
     while(s->next != NULL){
         s = s->next;
         if(year == s->year){
-            linkbook(s->id,s->title,s->authors,s->year,s->copies, listyear.list);
+            linkbook(s->id,s->title,s->authors,s->year,s->copies,s->whole, listyear.list);
         }
     }
     return listyear;
@@ -294,7 +317,7 @@ void searchbook(Book *b,User *h){
         j++;
     }
     do{
-        if(choice[1] != ' ' || choice[0] != '1' && choice[0] != '2' && choice[0] != '3' && choice[0] != '4'){
+        if(choice[1] != ' ' || (choice[0] != '1' && choice[0] != '2' && choice[0] != '3' && choice[0] != '4')){
             printf("Wrong instruction!\nPlease retype your instruction:");
             choice[1] = ' ';
             j = 0;
@@ -393,9 +416,7 @@ void searchbook(Book *b,User *h){
             k = 1;
         }
     }while(k == 0);
-    librariansurface(h,b);
 }
 //
 // Created by Chaos on 2022/3/20.
 //
-

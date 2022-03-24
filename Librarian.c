@@ -39,8 +39,8 @@ void librariansurface(User *h1,Book *b){
     signed char c;
     choice[1] = ' ';
     int i = 0,j = 0;
-    printf("\nWelcome to the librarian interface!\n");
-    printf("Choose an option:\n1.list all books\n2.add books\n3.delete books\n4.search books\n5.exit\n");
+    printf("\n******************************************\nWelcome to the librarian interface!\n");
+    printf("Choose an option:\n1.list all books\n2.add books\n3.delete books\n4.search books\n5.exit\n******************************************\n");
     printf("Please enter you choice:");
     c = getchar();
     while(c != '\n'){
@@ -49,7 +49,7 @@ void librariansurface(User *h1,Book *b){
         j++;
     }
     do{
-        if(choice[1] != ' ' || choice[0] != '1' && choice[0] != '2' && choice[0] != '3' && choice[0] != '4' && choice[0] != '5'){
+        if(choice[1] != ' ' || (choice[0] != '1' && choice[0] != '2' && choice[0] != '3' && choice[0] != '4' && choice[0] != '5')){
             printf("Wrong instruction!\nPlease retype your instruction:");
             choice[1] = ' ';
             j = 0;
@@ -74,13 +74,21 @@ void librariansurface(User *h1,Book *b){
             remove_book(b,h1);
         }
         else if(choice[0] == '4'){
-            i = 1;
             searchbook(b,h1);
+            printf("\nWelcome to the librarian interface!\n");
+            printf("Choose an option:\n1.list all books\n2.add books\n3.delete books\n4.search books\n5.exit\n");
+            printf("Please enter you choice:");
+            c = getchar();
+            choice[1] = ' ';
+            j = 0;
+            while(c != '\n'){
+                choice[j] = c;
+                c = getchar();
+                j++;
+            }
         }
         else if(choice[0] == '5'){
-            FILE *f;
-            i = 1;
-            store_books(f,b);
+            store_books(b->title,b);
             mainsurface(h1,b);
             break;
         }

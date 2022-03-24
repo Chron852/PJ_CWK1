@@ -5,7 +5,7 @@
 #include "book_management.h"
 
 void Registersurface(User *h,Book *b);
-void Loaduser(User *h);
+void Loaduser(char *filename,User *h);
 int checkname(char *name,User *h);
 int checkpass(char *pass);
 void mainsurface(User *h,Book *b);
