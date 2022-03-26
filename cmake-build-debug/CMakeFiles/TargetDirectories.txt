@@ -1,3 +1,0 @@
-E:/LEARNING/LEEDS/YEAR_TWO_semester2/programming_project/coursework1/code/cmake-build-debug/CMakeFiles/code.dir
-E:/LEARNING/LEEDS/YEAR_TWO_semester2/programming_project/coursework1/code/cmake-build-debug/CMakeFiles/edit_cache.dir
-E:/LEARNING/LEEDS/YEAR_TWO_semester2/programming_project/coursework1/code/cmake-build-debug/CMakeFiles/rebuild_cache.dir
