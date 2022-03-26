@@ -55,7 +55,7 @@ void Registersurface(User *h,Book *b){
     char *name,*pass,c,name1[100],pass1[100];
     FILE *f;
     int i = 0;
-    printf("Please enter your username(3-20 letters):");
+    printf("\n\n********************\n\nPlease enter your username(3-20 letters):");
     c = getchar();
     while( c != '\n'){
         name1[i] = c;
@@ -142,5 +142,5 @@ void Registersurface(User *h,Book *b){
     printf("Registered Successfully!\n");
     fclose(f);
     Loaduser(h->username,h);
-    Loginsurface(h,b);
+    mainsurface(h,b);
 }

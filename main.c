@@ -46,7 +46,7 @@ void mainsurface(User *h,Book *b){
     signed char c;
     choice[1] = ' ';
     printf("\n\n******************************************\nWelcome to online library!\n");
-    printf("Choose an option:\n1.Login\n2.Register\n3.exit\n******************************************\n");
+    printf("Choose an option:\n\n\t1.Login\n\t2.Register\n\t3.exit\n\n******************************************\n");
     printf("Please enter you choice:");
     c = getchar();
     while(c != '\n'){

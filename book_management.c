@@ -110,7 +110,7 @@ int add_book(Book *book,User *h1){
         id = s->id;
     }
     id++;
-    printf("Please Enter the Book title:");
+    printf("\n\n********************\nPlease Enter the Book title:");
     i = 0;
     c = getchar();
     while( c != '\n'){
@@ -196,7 +196,7 @@ int remove_book(Book *book,User *h1){
     }
     list_books(book);
     if(book->next != NULL){
-        printf("Please choose the book id:");
+        printf("\n\n********************\n\nPlease choose the book id(type \"exit\" to back):");
         j = 0;
         c = getchar();
         while(c != '\n'){
@@ -207,7 +207,8 @@ int remove_book(Book *book,User *h1){
         }
         do{
             if(choice[1] != ' ' || k > m || k < 0){
-                printf("Wrong instruction!\nPlease retype your instruction:");
+                if(check(choice,"exit") == 1) break;
+                printf("Wrong instruction!\nPlease retype your instruction(or type \"exit\" to leave):");
                 choice[1] = ' ';
                 j = 0;
                 k = 0;
@@ -308,7 +309,7 @@ void searchbook(Book *b,User *h){
     char choice[100],c,*title,*author,title1[100],author1[100],year1[100];
     int i,j = 0,year,k = 0,flag = 0;
     choice[1] = ' ';
-    printf("\n1.search book by title\n2.search book by author\n3.search book by year\n4.exit\n");
+    printf("\n\n********************\n\n\t1.search book by title\n\t2.search book by author\n\t3.search book by year\n\t4.exit\n\n");
     printf("please enter your choice:");
     c = getchar();
     while(c != '\n'){

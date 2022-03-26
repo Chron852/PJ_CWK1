@@ -38,7 +38,7 @@ int checkTpass(char *pass,User *h,char *name){
 void Loginsurface(User *h,Book *b){
     char c,name1[100],pass1[100],*name,*pass;
     int i;
-    printf("\nPlease enter your username:");
+    printf("\n\n********************\n\nPlease enter your username:");
     i = 0;
     c = getchar();
     while( c != '\n'){

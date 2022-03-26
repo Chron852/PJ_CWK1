@@ -5,6 +5,7 @@
 #include "user.h"
 #include "Librarian.h"
 #include "Register.h"
+#include "Login.h"
 
 void list_user_books(Book *b){
     Book *h;
@@ -61,7 +62,7 @@ void searchbookuser(Book *b,User *h,char *name){
     char choice[100],c,*title,*author,title1[100],author1[100],year1[100];
     int i,j = 0,year,k = 0,flag = 0;
     choice[1] = ' ';
-    printf("\nChoose an option:\n1.search book by title\n2.search book by author\n3.search book by year\n4.exit\n");
+    printf("\n\n********************\n\nChoose an option:\n\t1.search book by title\n\t2.search book by author\n\t3.search book by year\n\t4.exit\n");
     printf("please enter your choice:");
     c = getchar();
     while(c != '\n'){
@@ -187,7 +188,7 @@ void borrowbook(Book *b,Book *u){
     }
     if(b->next != NULL){
         list_books(b);
-        printf("Please enter the Book ID you want to borrowed:");
+        printf("\n********************\nPlease enter the Book ID you want to borrowed(or type \"exit\" to leave):");
         j = 0;
         c = getchar();
         while(c != '\n'){
@@ -198,6 +199,7 @@ void borrowbook(Book *b,Book *u){
         }
         do{
             if(choice[1] != ' ' || k > m || k < 0){
+                if(check("exit",choice) == 1) break;
                 printf("Book ID invalid!\nPlease retype ID:");
                 choice[1] = ' ';
                 j = 0;
@@ -246,7 +248,7 @@ void returnbook(Book *b,Book *u){
             s = s->next;
             m++;
         }
-        printf("Please choose the book id:");
+        printf("\n********************\nPlease choose the book id(or type \"exit\" to leave):");
         j = 0;
         c = getchar();
         while(c != '\n'){
@@ -257,6 +259,7 @@ void returnbook(Book *b,Book *u){
         }
         do{
             if(choice[1] != ' ' || k > m || k < 0){
+                if(check(choice,"exit") ==1 ) break;
                 printf("Book ID invalid!\nPlease retype ID:");
                 choice[1] = ' ';
                 j = 0;
