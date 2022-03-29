@@ -2,7 +2,6 @@
 #include<string.h>
 #include "Register.h"
 #include "book_management.h"
-#include "Login.h"
 
 int checkpass(char *pass){
     int i,flag = 0;
@@ -52,9 +51,9 @@ int checkname(char *name,User *h){
 }
 
 void Registersurface(User *h,Book *b){
-    char *name,*pass,c,name1[100],pass1[100];
+    char *name,*pass,c,name1[100],pass1[100],pass2[100];
     FILE *f;
-    int i = 0;
+    int i = 0,check;
     printf("\n\n********************\n\nPlease enter your username(3-20 letters):");
     c = getchar();
     while( c != '\n'){
@@ -103,9 +102,10 @@ void Registersurface(User *h,Book *b){
     }
     pass = pass1;
     pass[i] = '\0';
-    while(checkpass(pass1) != 0){
-        if(checkpass(pass1) == 1){
-            printf("Longer than 20 letters\n");
+    check = checkpass(pass1);
+    while(check != 0){
+        if(check == 1){
+            printf("Passcode longer than 20 letters\n--------------------\n");
             printf("Please retype(or type e to back to upper surface):");
             i = 0;
             c = getchar();
@@ -116,12 +116,13 @@ void Registersurface(User *h,Book *b){
             }
             pass = pass1;
             pass[i] = '\0';
+            check = checkpass(pass1);
         }
-        else if(checkpass(pass1) == 2){
+        else if(check == 2){
             mainsurface(h,b);
         }
-        else if(checkpass(pass1) == 3){
-            printf("Shorter than 3 letters\n");
+        else if(check == 3){
+            printf("Passcode shorter than 3 letters\n--------------------\n");
             printf("Please retype(or type e to back to upper surface):");
             i = 0;
             c = getchar();
@@ -132,15 +133,29 @@ void Registersurface(User *h,Book *b){
             }
             pass = pass1;
             pass[i] = '\0';
+            check = checkpass(pass1);
         }
     }
-    f = fopen("user.txt","a");
-    fputs(name,f);
-    fputc('\t',f);
-    fputs(pass,f);
-    fputc('\n',f);
-    printf("Registered Successfully!\n");
-    fclose(f);
-    Loaduser(h->username,h);
+    printf("Please re-enter your passcode(3-20 letters):");
+    c = getchar();
+    i = 0;
+    while( c != '\n'){
+        pass2[i] = c;
+        i++;
+        c = getchar();
+    }
+    if(strcmp(pass1,pass2) == 0){
+        f = fopen("user.txt","a");
+        fputs(name,f);
+        fputc('\t',f);
+        fputs(pass,f);
+        fputc('\n',f);
+        printf("Registered Successfully!\n--------------------\n");
+        fclose(f);
+        Loaduser(h->username,h);
+    }
+    else{
+        printf("Passcode is different!\nRegistered failed!\n--------------------\n");
+    }
     mainsurface(h,b);
 }

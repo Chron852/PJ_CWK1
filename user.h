@@ -6,7 +6,7 @@
 void usersurface(char *name,Book *b,User *h);
 void borrowbook(Book *b,Book *u);
 void returnbook(Book *b,Book *u);
-void searchbookuser(Book *b,User *h,char *name);
+void searchbookuser(Book *b,User *h);
 void loaduserbook(Book *b,char *name);
 int checkborrow(Book *u,char *title,char *author);
 void storebook(char *name, Book *u);

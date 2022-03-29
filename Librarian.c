@@ -75,8 +75,8 @@ void librariansurface(User *h1,Book *b){
         }
         else if(choice[0] == '4'){
             searchbook(b,h1);
-            printf("\nWelcome to the librarian interface!\n");
-            printf("Choose an option:\n1.list all books\n2.add books\n3.delete books\n4.search books\n5.exit\n");
+            printf("\n\n********************\nWelcome to the librarian interface!\n");
+            printf("Choose an option:\n1.list all books\n2.add books\n3.delete books\n4.search books\n5.exit\n********************\n");
             printf("Please enter you choice:");
             c = getchar();
             choice[1] = ' ';

@@ -75,7 +75,7 @@ void mainsurface(User *h,Book *b){
             Registersurface(h,b);
         }
         else if(choice[0] == '3'){
-            printf("\nLibrary closed!");
+            printf("\nLibrary closed!--------------------\n");
             return;
         }
     }while(i == 0);
@@ -97,7 +97,7 @@ int main(int argc,char *argv[]){
     h2->next = NULL;
     load_books(file1, h2);
     Loaduser(file2,h1);
-    printf("Data Loading!\n");
+    printf("Data Loading!\n--------------------\n");
     mainsurface(h1,h2);
     return 0;
 }

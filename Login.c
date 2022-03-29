@@ -51,7 +51,7 @@ void Loginsurface(User *h,Book *b){
     while(checkname(name,h) != 1){
         if(checkname(name,h) == 0 || checkname(name,h) == 2){
             printf("username don't exist\n");
-            printf("Please retype(or type e to back to the upper surface):");
+            printf("Please retype your username(or type e to back to the upper surface):");
             i = 0;
             c = getchar();
             while( c != '\n'){
@@ -79,7 +79,7 @@ void Loginsurface(User *h,Book *b){
     while(checkTpass(pass,h,name) != 1){
         if(checkTpass(pass,h,name) == 0){
             printf("passcode is wrong!\n");
-            printf("Please retype(or type e to back to the upper surface):");
+            printf("Please retype your passcode(or type e to back to the upper surface):");
             i = 0;
             c = getchar();
             while( c != '\n'){

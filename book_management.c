@@ -131,7 +131,7 @@ int add_book(Book *book,User *h1){
     author = author1;
     author[i] = '\0';
     if(checkbook(title,author,book) == 1){
-        printf("Book exists!\n");
+        printf("Book exists!\n--------------------\n");
         t = 1;
         librariansurface(h1,book);
     }else{
@@ -148,7 +148,7 @@ int add_book(Book *book,User *h1){
             c = getchar();
         }
         if(flag == 1){
-            printf("Year must be an integer!\n");
+            printf("Year must be an integer!\n--------------------\n");
             t = 1;
             getchar();
             librariansurface(h1,book);
@@ -168,7 +168,7 @@ int add_book(Book *book,User *h1){
                 c = getchar();
             }
             if(flag == 1){
-                printf("Copies must be an integer!\n");
+                printf("Copies must be an integer!\n--------------------\n");
                 t = 1;
                 getchar();
                 librariansurface(h1,book);
@@ -229,7 +229,7 @@ int remove_book(Book *book,User *h1){
                     s = s->next;
                 }
                 if(s->copies != s->whole){
-                    printf("Book have been borrowed!\nYou cannot remove!\n");
+                    printf("Book have been borrowed!\nYou cannot remove!\n--------------------\n");
                 }else{
                     last->next = s->next;
                     s = last->next;
@@ -245,7 +245,7 @@ int remove_book(Book *book,User *h1){
                             s->id = last->id + 1;
                         }
                     }
-                    printf("Removed successfully!\n");
+                    printf("Removed successfully!\n--------------------\n");
                 }
             }
         }while(i == 0);
@@ -351,7 +351,7 @@ void searchbook(Book *b,User *h){
                     printf("%d\t%s\t%s\t%d\t%d\n",s->id,s->title,s->authors,s->year,s->copies);
                 }
             }else{
-                printf("Book do not exist!\n");
+                printf("Book do not exist!\n--------------------\n");
             }
         }
         else if( choice[0] == '2'){
@@ -376,7 +376,7 @@ void searchbook(Book *b,User *h){
                     printf("%d\t%s\t%s\t%d\t%d\n",s->id,s->title,s->authors,s->year,s->copies);
                 }
             }else{
-                printf("Book do not exist!\n");
+                printf("Book do not exist!\n--------------------\n");
             }
         }
         else if(choice[0] == '3'){
@@ -394,7 +394,7 @@ void searchbook(Book *b,User *h){
                 c = getchar();
             }
             if(flag == 1){
-                printf("Year must be an integer!\n");
+                printf("Year must be an integer!\n--------------------\n");
                 getchar();
                 searchbook(b,h);
             }
@@ -410,7 +410,7 @@ void searchbook(Book *b,User *h){
                     printf("%d\t%s\t%s\t%d\t%d\n",s->id,s->title,s->authors,s->year,s->copies);
                 }
             }else{
-                printf("Book do not exist!\n");
+                printf("Book do not exist!\n--------------------\n");
             }
         }
         else if(choice[0] == '4'){

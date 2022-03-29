@@ -68,6 +68,6 @@ BookList find_book_by_year (unsigned int year,Book *b);
 
 void linkbook(unsigned int id,char *title,char *authors,unsigned int year,unsigned int copies,int whole,Book *h);
 void searchbook(Book *b,User *h);
-void searchbookuser(Book *b,User *h,char *name);
+
 
 #endif

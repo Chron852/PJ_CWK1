@@ -57,7 +57,7 @@ void loaduserbook(Book *b,char *name){
 
 }
 
-void searchbookuser(Book *b,User *h,char *name){
+void searchbookuser(Book *b,User *h){
     BookList list1;
     char choice[100],c,*title,*author,title1[100],author1[100],year1[100];
     int i,j = 0,year,k = 0,flag = 0;
@@ -104,7 +104,7 @@ void searchbookuser(Book *b,User *h,char *name){
                     printf("%d\t%s\t%s\t%d\t%d\n",s->id,s->title,s->authors,s->year,s->copies);
                 }
             }else{
-                printf("Book do not exist!\n");
+                printf("Book do not exist!\n--------------------\n");
             }
         }
         else if( choice[0] == '2'){
@@ -129,7 +129,7 @@ void searchbookuser(Book *b,User *h,char *name){
                     printf("%d\t%s\t%s\t%d\t%d\n",s->id,s->title,s->authors,s->year,s->copies);
                 }
             }else{
-                printf("Book do not exist!\n");
+                printf("Book do not exist!\n--------------------\n");
             }
         }
         else if(choice[0] == '3'){
@@ -147,7 +147,7 @@ void searchbookuser(Book *b,User *h,char *name){
                 c = getchar();
             }
             if(flag == 1){
-                printf("Year must be an integer!\n");
+                printf("Year must be an integer!\n--------------------\n");
                 getchar();
                 searchbook(b,h);
             }
@@ -163,7 +163,7 @@ void searchbookuser(Book *b,User *h,char *name){
                     printf("%d\t%s\t%s\t%d\t%d\n",s->id,s->title,s->authors,s->year,s->copies);
                 }
             }else{
-                printf("Book do not exist!\n");
+                printf("Book do not exist!\n--------------------\n");
             }
         }
         else if(choice[0] == '4'){
@@ -186,53 +186,57 @@ void borrowbook(Book *b,Book *u){
         s = s->next;
         n++;
     }
-    if(b->next != NULL){
-        list_books(b);
-        printf("\n********************\nPlease enter the Book ID you want to borrowed(or type \"exit\" to leave):");
-        j = 0;
-        c = getchar();
-        while(c != '\n'){
-            choice[j] = c;
-            k = k*10 + c - '0';
+    if(n==5){
+        printf("--------------------\nYou have borrowed 5 books\nPlease borrow after return a book!\n--------------------\n");
+    }else{
+        if(b->next != NULL){
+            list_books(b);
+            printf("\n********************\nPlease enter the Book ID you want to borrowed(or type \"exit\" to leave):");
+            j = 0;
             c = getchar();
-            j++;
-        }
-        do{
-            if(choice[1] != ' ' || k > m || k < 0){
-                if(check("exit",choice) == 1) break;
-                printf("Book ID invalid!\nPlease retype ID:");
-                choice[1] = ' ';
-                j = 0;
-                k = 0;
+            while(c != '\n'){
+                choice[j] = c;
+                k = k*10 + c - '0';
                 c = getchar();
-                while(c != '\n'){
-                    choice[j] = c;
-                    k = k*10 + c - '0';
-                    c = getchar();
-                    j++;
-                }
+                j++;
             }
-            else{
-                i = 1;
-                s = b->next;
-                while(s->id != k){
-                    s = s->next;
-                }
-                if(s->copies > 0 && checkborrow(u,s->title,s->authors) == 0){
-                    linkbook(n+1,s->title,s->authors,s->year,s->copies,s->whole,u);
-                    s->copies -= 1;
-                    printf("Borrowed successfully!\n");
-                }
-                else if(checkborrow(u,s->title,s->authors) == 1){
-                    printf("You have borrowed this book!\n");
+            do{
+                if(choice[1] != ' ' || k > m || k < 0){
+                    if(check("exit",choice) == 1) break;
+                    printf("Book ID invalid!\nPlease retype ID:");
+                    choice[1] = ' ';
+                    j = 0;
+                    k = 0;
+                    c = getchar();
+                    while(c != '\n'){
+                        choice[j] = c;
+                        k = k*10 + c - '0';
+                        c = getchar();
+                        j++;
+                    }
                 }
                 else{
-                    printf("Borrowed failed!\n");
+                    i = 1;
+                    s = b->next;
+                    while(s->id != k){
+                        s = s->next;
+                    }
+                    if(s->copies > 0 && checkborrow(u,s->title,s->authors) == 0){
+                        linkbook(n+1,s->title,s->authors,s->year,s->copies,s->whole,u);
+                        s->copies -= 1;
+                        printf("Borrowed successfully!\n--------------------\n");
+                    }
+                    else if(checkborrow(u,s->title,s->authors) == 1){
+                        printf("You have borrowed this book!\n--------------------\n");
+                    }
+                    else{
+                        printf("Borrowed failed!\n--------------------\n");
+                    }
                 }
-            }
-        }while(i == 0);
-    } else{
-        printf("Library is empty!\nPlease call librarian to add books!\n");
+            }while(i == 0);
+        } else{
+            printf("--------------------\nLibrary is empty!\nPlease call librarian to add books!\n--------------------");
+        }
     }
 }
 
@@ -300,7 +304,7 @@ void returnbook(Book *b,Book *u){
                         s->id = last->id + 1;
                     }
                 }
-                printf("Returned successfully!\n");
+                printf("Returned successfully!\n--------------------\n");
             }
         }while(i == 0);
     }
@@ -373,7 +377,7 @@ void usersurface(char *name,Book *b,User *h){
         }
         else if(choice[0] == '1'){
             list_books(b);
-            printf("Choose you option:\n1.list all books\n2.search for books\n3.borrow books\n4.return books\n5.exit\n");
+            printf("\n\n--------------------\nChoose you option:\n1.list all books\n2.search for books\n3.borrow books\n4.return books\n5.exit\n");
             printf("Please enter you choice:");
             j = 0;
             c = getchar();
@@ -384,8 +388,8 @@ void usersurface(char *name,Book *b,User *h){
             }
         }
         else if( choice[0] == '2'){
-            searchbookuser(b,h,name);
-            printf("Choose you option:\n1.list all books\n2.search for books\n3.borrow books\n4.return books\n5.exit\n");
+            searchbookuser(b,h);
+            printf("\n\n--------------------\nChoose you option:\n1.list all books\n2.search for books\n3.borrow books\n4.return books\n5.exit\n");
             printf("Please enter you choice:");
             j = 0;
             c = getchar();
@@ -397,7 +401,7 @@ void usersurface(char *name,Book *b,User *h){
         }
         else if(choice[0] == '3'){
             borrowbook(b,us);
-            printf("Choose you option:\n1.list all books\n2.search for books\n3.borrow books\n4.return books\n5.exit\n");
+            printf("\n\n--------------------\nChoose you option:\n1.list all books\n2.search for books\n3.borrow books\n4.return books\n5.exit\n");
             printf("Please enter you choice:");
             j = 0;
             c = getchar();
@@ -409,7 +413,7 @@ void usersurface(char *name,Book *b,User *h){
         }
         else if(choice[0] == '4'){
             returnbook(b,us);
-            printf("Choose you option:\n1.list all books\n2.search for books\n3.borrow books\n4.return books\n5.exit\n");
+            printf("\n\n--------------------\nChoose you option:\n1.list all books\n2.search for books\n3.borrow books\n4.return books\n5.exit\n");
             printf("Please enter you choice:");
             j = 0;
             c = getchar();
