@@ -186,6 +186,7 @@ int add_book(Book *book,User *h1){
 
 int remove_book(Book *book,User *h1){
     char choice[100],c;
+    int flag = 0;
     choice[1] = ' ';
     int i = 0,j,k = 0,m=0,t = 0;
     Book *s,*last;
@@ -202,20 +203,27 @@ int remove_book(Book *book,User *h1){
         while(c != '\n'){
             choice[j] = c;
             k = k*10 + c - '0';
+            if(c-'0' < 0 || c-'0' > 9){
+                flag = 1;
+            }
             c = getchar();
             j++;
         }
         do{
-            if(choice[1] != ' ' || k > m || k < 0){
+            if(k > m || k < 0 || flag == 1){
                 if(check(choice,"exit") == 1) break;
                 printf("Wrong instruction!\nPlease retype your instruction(or type \"exit\" to leave):");
                 choice[1] = ' ';
+                flag = 0;
                 j = 0;
                 k = 0;
                 c = getchar();
                 while(c != '\n'){
                     choice[j] = c;
                     k = k*10 + c - '0';
+                    if(c-'0' < 0 || c-'0' > 9){
+                        flag = 1;
+                    }
                     c = getchar();
                     j++;
                 }

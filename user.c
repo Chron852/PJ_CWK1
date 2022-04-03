@@ -174,7 +174,7 @@ void searchbookuser(Book *b,User *h){
 
 void borrowbook(Book *b,Book *u){
     char choice[100],c;
-    int j,k = 0,i = 0,m = 0,n = 0;
+    int j,k = 0,i = 0,m = 0,n = 0,flag = 0;
     choice[1] = ' ';
     Book *s = b;
     while(s->next != NULL){
@@ -197,16 +197,20 @@ void borrowbook(Book *b,Book *u){
             while(c != '\n'){
                 choice[j] = c;
                 k = k*10 + c - '0';
+                if(c-'0' < 0 || c-'0' > 9){
+                    flag = 1;
+                }
                 c = getchar();
                 j++;
             }
             do{
-                if(choice[1] != ' ' || k > m || k < 0){
+                if(flag == 1|| k > m || k < 0){
                     if(check("exit",choice) == 1) break;
                     printf("Book ID invalid!\nPlease retype ID:");
                     choice[1] = ' ';
                     j = 0;
                     k = 0;
+                    flag = 0;
                     c = getchar();
                     while(c != '\n'){
                         choice[j] = c;

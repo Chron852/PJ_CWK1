@@ -75,7 +75,7 @@ void mainsurface(User *h,Book *b){
             Registersurface(h,b);
         }
         else if(choice[0] == '3'){
-            printf("\nLibrary closed!--------------------\n");
+            printf("\nLibrary closed!\n--------------------\n");
             return;
         }
     }while(i == 0);
