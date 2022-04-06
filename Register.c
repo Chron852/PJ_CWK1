@@ -31,6 +31,10 @@ int checkname(char *name,User *h){
         }
     }
     else {
+        if(strcmp(name,"librarian") == 0){
+            flag = 1;
+            return flag;
+        }
         while (k->next != NULL) {
             k = k->next;
             j = 0;

@@ -40,7 +40,7 @@ void librariansurface(User *h1,Book *b){
     choice[1] = ' ';
     int i = 0,j = 0;
     printf("\n******************************************\nWelcome to the librarian interface!\n");
-    printf("Choose an option:\n1.list all books\n2.add books\n3.delete books\n4.search books\n5.exit\n******************************************\n");
+    printf("Choose an option:\n\n\t1.list all books\n\t2.add books\n\t3.delete books\n\t4.search books\n\t5.exit\n\n******************************************\n");
     printf("Please enter you choice:");
     c = getchar();
     while(c != '\n'){

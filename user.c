@@ -358,7 +358,7 @@ void usersurface(char *name,Book *b,User *h){
     name = name1;
     choice[1] = ' ';
     printf("\n******************************************\nWelcome, %s!\n",name);
-    printf("Choose you option:\n1.list all books\n2.search for books\n3.borrow books\n4.return books\n5.exit\n******************************************\n");
+    printf("Choose you option:\n\n\t1.list all books\n\t2.search for books\n\t3.borrow books\n\t4.return books\n\t5.exit\n\n******************************************\n");
     printf("Please enter you choice:");
     j = 0;
     c = getchar();
