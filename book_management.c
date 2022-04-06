@@ -209,6 +209,7 @@ int remove_book(Book *book,User *h1){
             c = getchar();
             j++;
         }
+        choice[j] = '\0';
         do{
             if(k > m || k < 0 || flag == 1){
                 if(check(choice,"exit") == 1) break;
@@ -227,6 +228,7 @@ int remove_book(Book *book,User *h1){
                     c = getchar();
                     j++;
                 }
+                choice[j] = '\0';
             }
             else{
                 i = 1;
@@ -405,20 +407,21 @@ void searchbook(Book *b,User *h){
                 printf("Year must be an integer!\n--------------------\n");
                 getchar();
                 searchbook(b,h);
-            }
-            year1[i] = '\0';
-            year = atoi(year1);
-            list1 = find_book_by_year(year,b);
-            Book *s;
-            s = list1.list;
-            if(s->next != NULL){
-                printf("\n\nID\tTitle\tAuthors\tYears\tCopies\n");
-                while(s->next != NULL){
-                    s = s->next;
-                    printf("%d\t%s\t%s\t%d\t%d\n",s->id,s->title,s->authors,s->year,s->copies);
-                }
             }else{
-                printf("Book do not exist!\n--------------------\n");
+                year1[i] = '\0';
+                year = atoi(year1);
+                list1 = find_book_by_year(year,b);
+                Book *s;
+                s = list1.list;
+                if(s->next != NULL){
+                    printf("\n\nID\tTitle\tAuthors\tYears\tCopies\n");
+                    while(s->next != NULL){
+                        s = s->next;
+                        printf("%d\t%s\t%s\t%d\t%d\n",s->id,s->title,s->authors,s->year,s->copies);
+                    }
+                }else{
+                    printf("Book do not exist!\n--------------------\n");
+                }
             }
         }
         else if(choice[0] == '4'){
