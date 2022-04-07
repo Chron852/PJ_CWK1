@@ -66,8 +66,8 @@ BookList find_book_by_author (const char *author,Book *b);
 //list is the NULL pointer.
 BookList find_book_by_year (unsigned int year,Book *b);
 
-void linkbook(unsigned int id,char *title,char *authors,unsigned int year,unsigned int copies,int whole,Book *h);
-void searchbook(Book *b,User *h);
+void linkbook(unsigned int id,char *title,char *authors,unsigned int year,unsigned int copies,int whole,Book *h);//to add book at the end of node h
+void searchbook(Book *b,User *h);//to combine three search into 1
 
 
 #endif
